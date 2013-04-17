@@ -7,7 +7,7 @@ public class Hello {
 	public static void main(String[] args) {
 		System.out.println("Hello World");
 		System.out.println("Aaron IS THE BEST"); //Courtesy of Aaron
-		System.out.println("Fuck mobus"); //Courtesy of everyone who ever existed in any universe and demension
+		System.out.println("Fuck mobus"); //Courtesy of everyone who ever existed in any universe and dimension
 	}
 
 }
