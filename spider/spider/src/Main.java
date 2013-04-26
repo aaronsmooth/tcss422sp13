@@ -26,7 +26,15 @@ public class Main {
 		
 		retriever.start(); //start the page retriever thread
 		
-		System.out.printf("in doc queue: %s\n", url_queue.getFirst()); //URL is in doc queue
+		synchronized (doc_queue) {
+			doc_queue.notifyAll();
+		}
+		
+		while (doc_queue.isEmpty()) {
+			System.out.println("waiting");
+		}
+		
+		System.out.printf("in doc queue: %s\n", doc_queue.getFirst()); //URL is in doc queue
 		
 		//retriever.setURL(new URL("http://faculty.washington.edu/gmobus"));
 		//System.out.printf("%s", retriever.getURL().toString());

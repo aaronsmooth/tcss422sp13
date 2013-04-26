@@ -33,7 +33,7 @@ public class PageRetriever extends Thread {
 		
 		do {
 			synchronized (myRetrieveQueue) {
-				retrievePage();;
+				retrievePage();
 			}
 			
 			try {
@@ -53,6 +53,7 @@ public class PageRetriever extends Thread {
 	private synchronized void retrievePage() {
 		
 		while (myRetrieveQueue.isEmpty()) {
+			
 			try {
 				myRetrieveQueue.wait(); 
 			} catch (InterruptedException e) {
