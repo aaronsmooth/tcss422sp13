@@ -2,28 +2,23 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayDeque;
-import java.util.concurrent.locks.Lock;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 
 
-public class PageRetriever implements Runnable {
+public class PageRetriever extends Thread {
 	
 	private URL myURL;
 	private Document myDoc;
-	private Lock pageToRetrieveLock;
-	private Lock pageBufferLock;
-	private ArrayDeque<URL> pageToRetrieve;
-	private ArrayDeque<Document> pageBuffer;
+	private ArrayDeque<URL> myRetrieveQueue;
+	private ArrayDeque<Document> myPageBufferQueue;
 
-	public PageRetriever(Lock retrieveLock, Lock bufferLock,
-							ArrayDeque<URL> retrieveQueue, ArrayDeque<Document> bufferQueue) {
-		pageToRetrieveLock = retrieveLock;
-		pageBufferLock = bufferLock;
-		pageToRetrieve = retrieveQueue;
-		pageBuffer = bufferQueue;
+	public PageRetriever(ArrayDeque<URL> retrieveQueue, ArrayDeque<Document> bufferQueue) {
+
+		myRetrieveQueue = retrieveQueue;
+		myPageBufferQueue = bufferQueue;
 		
 		try { 
 			myURL = new URL("");
@@ -37,19 +32,34 @@ public class PageRetriever implements Runnable {
 	public void run() {
 		
 		do {
-			pageToRetrieveLock.lock();
-			myURL = pageToRetrieve.removeFirst();
-			pageToRetrieveLock.unlock();
+			retrievePage();
 		
 			try {
-				myDoc = Jsoup.connect(myURL.toString()).get();
+				myDoc = Jsoup.connect(myURL.toExternalForm()).get();
 			} catch (IOException e) {
+				System.out.println("\nCouldnt connect to URL!");
 				e.printStackTrace();
 			}
 		
-			pageBufferLock.lock();
-			pageBuffer.addLast(myDoc);
-			pageBufferLock.unlock();
-		} while (true);
+			placeInPageBuffer();
+		} while(true);
+	}
+	
+	private synchronized void retrievePage() {
+		
+		while (myRetrieveQueue.isEmpty()) {
+			try {
+				this.wait();
+			} catch (InterruptedException e) {
+			}
+		}
+		
+		myURL = myRetrieveQueue.removeFirst();
+		myRetrieveQueue.notifyAll();
+	}
+	
+	private synchronized void placeInPageBuffer() {
+		myPageBufferQueue.addLast(myDoc);
+		myPageBufferQueue.notifyAll();
 	}
 }

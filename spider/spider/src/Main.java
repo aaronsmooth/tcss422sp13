@@ -3,7 +3,6 @@
  */
 
 import java.net.MalformedURLException;
-import java.net.URL;
 
 
 public class Main {
@@ -13,9 +12,11 @@ public class Main {
 	 * @throws MalformedURLException 
 	 */
 	public static void main(String[] args) throws MalformedURLException {
+		/*
 		PageRetriever retriever = new PageRetriever();
 		retriever.setURL(new URL("http://faculty.washington.edu/gmobus"));
 		System.out.printf("%s", retriever.getURL().toString());
+		*/
 	}
 
 }
