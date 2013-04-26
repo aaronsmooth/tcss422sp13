@@ -32,16 +32,21 @@ public class PageRetriever extends Thread {
 	public void run() {
 		
 		do {
-			retrievePage();
-		
+			synchronized (myRetrieveQueue) {
+				retrievePage();;
+			}
+			
 			try {
 				myDoc = Jsoup.connect(myURL.toExternalForm()).get();
 			} catch (IOException e) {
 				System.out.println("\nCouldnt connect to URL!");
 				e.printStackTrace();
 			}
-		
-			placeInPageBuffer();
+			
+			synchronized (myPageBufferQueue) {
+				placeInPageBuffer();
+			}
+			
 		} while(true);
 	}
 	
@@ -49,8 +54,9 @@ public class PageRetriever extends Thread {
 		
 		while (myRetrieveQueue.isEmpty()) {
 			try {
-				this.wait();
+				myRetrieveQueue.wait(); 
 			} catch (InterruptedException e) {
+				
 			}
 		}
 		
