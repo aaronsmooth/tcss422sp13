@@ -3,13 +3,10 @@
  */
 
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 import java.util.Scanner;
 import java.util.TreeMap;
 
@@ -24,13 +21,17 @@ public class Main {
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
+		
 		ArrayDeque<URL> url_queue = new ArrayDeque<>();
 		ArrayDeque<Document> pagebuffer = new ArrayDeque<>();
 		ArrayDeque<Document> gatherqueue = new ArrayDeque<>();
 		ArrayList<String> wordlist = new ArrayList<String>();
+		
 		Map<String, Integer> mainmap = new TreeMap<String, Integer>();
 		final Scanner input = new Scanner(System.in);
 		PageParser pageparser = new PageParser(url_queue, pagebuffer, gatherqueue);
+		
+		Integer linkCount = new Integer(0);
 		
 		final String main_url;
 	    int amount;

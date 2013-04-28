@@ -1,7 +1,9 @@
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayDeque;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -75,12 +77,15 @@ public class PageParser extends Thread {
 		System.out.println("in pageparser before for");
 		System.out.println(myRetrieveQueue);
 		for (Element link : links) {
-			String http = link.attr("abs:href");
-			if (http.substring(0, 4).equals("http") 
-        			&& !http.substring(http.length()-4,http.length()).equals(".m4v")
-        			&& !http.equals("http://questioneverything.typepad.com/")) {
-				URL url = new URL(http);
-				myRetrieveQueue.addLast(url);
+			try {
+				String http = link.attr("abs:href");
+				if (!http.equals("http://questioneverything.typepad.com/")) {
+					URL url = new URL(http);
+					myRetrieveQueue.addLast(url);
+				}
+					
+			} catch (IOException e) {
+				// Throw away links that don't work
 			}
         }
 		System.out.println("in pageparser");
