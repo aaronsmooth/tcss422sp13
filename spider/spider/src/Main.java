@@ -6,7 +6,11 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Scanner;
+import java.util.TreeMap;
 
 import org.jsoup.nodes.Document;
 
@@ -20,11 +24,17 @@ public class Main {
 	public static void main(String[] args) throws MalformedURLException {
 		ArrayDeque<URL> url_queue = new ArrayDeque<>();
 		ArrayDeque<Document> doc_queue = new ArrayDeque<>();
+		ArrayList<String> wordlist = new ArrayList<String>();
 		final Scanner input = new Scanner(System.in);
-	    String main_url;
 	    
-	    final ArrayList<String> wordlist = new ArrayList<String>();
-	    main_url = getInput(input, wordlist);
+		final String main_url;
+	    int amount;
+	    int numthread;
+	    System.out.print("Number of threads? ");
+	    numthread = input.nextInt();
+	    System.out.print("How many words do you want to check? ");
+		amount = input.nextInt();
+	    main_url = getInput(input, wordlist, amount);
 	    System.out.println(main_url);
 	    System.out.println(wordlist);
 
@@ -39,33 +49,45 @@ public class Main {
 			doc_queue.notifyAll();
 		}
 		
-		while (doc_queue.isEmpty()) {
-			System.out.println("waiting");
-		}
+//		while (doc_queue.isEmpty()) {
+//			System.out.println("waiting");
+//		}
 		
-		System.out.printf("in doc queue: %s\n", doc_queue.getFirst()); //URL is in doc queue
+//		System.out.printf("in doc queue: %s\n", doc_queue.getFirst()); //URL is in doc queue
 		
 		//retriever.setURL(new URL("http://faculty.washington.edu/gmobus"));
 		//System.out.printf("%s", retriever.getURL().toString());
+		
+		
+		//Test gatherer, 
+		Map<String, Integer> testmap = new TreeMap<String, Integer>();
+		ArrayList<String> gatherlist = new ArrayList<>();
+		gatherlist.add("the");
+		gatherlist.add("the");
+		gatherlist.add("this");
+		gatherlist.add("that");
+		gatherlist.add("these");
+		gatherlist.add("those");
+		DataGatherer data = new DataGatherer(wordlist, gatherlist);		
+		testmap=data.buildMap();
+
+		System.out.println(testmap);
 	    input.close();
 	}
+	
 	/**
 	 * getInput() helper method.
 	 * @param the_input the input
 	 * @param the_wordlist list of word
 	 * @return the url
 	 */
-	public static String getInput(final Scanner the_input, final ArrayList<String> the_wordlist) {  
-		System.out.print("Enter the URL: ");
-		final String url = the_input.next();
-		System.out.print("How many words do you want to check? ");
-		final int amount = the_input.nextInt();
-
-		for (int i = 0; i < amount; i++) {
+	public static String getInput(final Scanner the_input, final ArrayList<String> the_wordlist, int the_amount) {  
+		for (int i = 0; i < the_amount; i++) {
 			System.out.print("Enter a word: ");
 			the_wordlist.add(the_input.next());
 		}
-
+		System.out.print("Enter the URL: ");
+		final String url = the_input.next();
 		return url;
 	}
 }
