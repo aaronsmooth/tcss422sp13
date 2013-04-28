@@ -1,61 +1,109 @@
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Map;
-import java.util.TreeMap;
+import java.util.Scanner;
+import org.jsoup.nodes.Document;
 
 
-public class DataGatherer {
+public class DataGatherer extends Thread {
 	
 	private Map<String, Integer> myMap;
 	
-	private ArrayList<String> myTextList;
+	private ArrayDeque<Document> myGatherer;
 	
-	private ArrayList<String> myList;
+	private Document myDoc;
+	//private ArrayList<String> myList;
 	
 	/**
 	 * Constructor.
 	 * @param theList the list of word
 	 */
-	public DataGatherer(final ArrayList<String> theList, ArrayList<String> theTextList) {
-		myList = theList;
-		myTextList = theTextList;
-		myMap = new TreeMap<String, Integer>();
+	public DataGatherer(final ArrayList<String> theList, ArrayDeque<Document> theGatherQueue, Map<String, Integer> themap) {
+		//myList = theList;
+		myGatherer = theGatherQueue;
+		myMap = themap;
+		myDoc = new Document("");
+		for (String str : theList) {
+			myMap.put(str, 0);
+		}
 	}
 	
 	public Map<String, Integer> getMap() {
 		return myMap;
 	}
 	
-	public void SetList(ArrayList<String> theList) {
-		myList = theList;
-	}
+//	public void SetList(ArrayList<String> theList) {
+//		myList = theList;
+//	}
 	
-	public void setTextList(ArrayList<String> theTextList) {
-		myTextList = theTextList;
-	}
 	
-	public Map<String, Integer> buildMap() {
+//	public Map<String, Integer> buildMap() {
+//		
+//		String theWordinList;
+//		String theWordinTextList;
+//		
+//		for (int i = 0; i < myList.size(); i++) {
+//			theWordinList = myList.get(i).toLowerCase().replaceAll("\\W", "");
+//			
+//			for (int j = 0; j < myTextList.size(); j++) {
+//				theWordinTextList = myTextList.get(j).toLowerCase().replaceAll("\\W", "");
+//				final Integer occurs = myMap.get(theWordinList);
+//				if (theWordinList.equals(theWordinTextList)) {
+//					if (occurs == null) {
+//						myMap.put(theWordinList, 1);
+//					} else {
+//						myMap.put(theWordinList, occurs+1);
+//					}					
+//				}
+//				
+//
+//			}
+//			
+//		}
+//		return myMap;
+
+	public void run() {
+		String texts;
 		
-		String theWordinList;
-		String theWordinTextList;
 		
-		for (int i = 0; i < myList.size(); i++) {
-			theWordinList = myList.get(i).toLowerCase().replaceAll("\\W", "");
+		do {
+			synchronized (myGatherer) {
+				retrieveDoc();
+			}
+			String str;
+			texts = myDoc.body().text();
+			Scanner stringscan = new Scanner(texts);
+	        
+			while (stringscan.hasNext()) {
+	        	str = stringscan.next().toLowerCase().replaceAll("\\W", "");
+	        	if (myMap.containsKey(str)) {
+	        		myMap.put(str, myMap.get(str)+ 1);
+	        	}
+	        }
+			System.out.println(texts);
+			System.out.println(myMap);
+			stringscan.close();
+			break;
+
 			
-			for (int j = 0; j < myTextList.size(); j++) {
-				theWordinTextList = myTextList.get(j).toLowerCase().replaceAll("\\W", "");
-				final Integer occurs = myMap.get(theWordinList);
-				if (theWordinList.equals(theWordinTextList)) {
-					if (occurs == null) {
-						myMap.put(theWordinList, 1);
-					} else {
-						myMap.put(theWordinList, occurs+1);
-					}					
-				}
-				
+		} while (true);
+	
+	
+	}
+
+	private synchronized void retrieveDoc() {
+
+		while (myGatherer.isEmpty()) {
+
+			try {
+				myGatherer.wait(); 
+			} catch (InterruptedException e) {
 
 			}
-			
 		}
-		return myMap;
+
+		myDoc = myGatherer.removeFirst();
+		myGatherer.notifyAll();
 	}
+	
 }
