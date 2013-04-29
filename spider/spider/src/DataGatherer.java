@@ -12,7 +12,8 @@ public class DataGatherer extends Thread {
 	private ArrayDeque<Document> myGatherer;
 	
 	private Document myDoc;
-	//private ArrayList<String> myList;
+	
+	private int count = 0;
 	
 	/**
 	 * Constructor.
@@ -70,20 +71,28 @@ public class DataGatherer extends Thread {
 			synchronized (myGatherer) {
 				retrieveDoc();
 			}
+	
 			String str;
-			texts = myDoc.body().text();
-			Scanner stringscan = new Scanner(texts);
+
+			try {
+				texts = myDoc.body().text();
+				Scanner stringscan = new Scanner(texts);
 	        
-			while (stringscan.hasNext()) {
-	        	str = stringscan.next().toLowerCase().replaceAll("\\W", "");
-	        	if (myMap.containsKey(str)) {
-	        		myMap.put(str, myMap.get(str)+ 1);
-	        	}
-	        }
-			System.out.println(texts);
-			System.out.println(myMap);
-			stringscan.close();
-			break;
+				while (stringscan.hasNext()) {
+					str = stringscan.next().toLowerCase().replaceAll("\\W", "");
+					if (myMap.containsKey(str)) {
+						myMap.put(str, myMap.get(str)+ 1);
+					}
+				}	
+				//System.out.println(texts);
+				System.out.println(myMap);
+				++count;
+				System.out.printf("\nDataCount: %d", count);
+				System.out.printf("\nQueueCount: %d", myGatherer.size());
+				stringscan.close();
+			} catch (NullPointerException e) {
+				// Throw away docs with empty bodies
+			}
 
 			
 		} while (true);

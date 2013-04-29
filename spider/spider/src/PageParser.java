@@ -20,6 +20,8 @@ public class PageParser extends Thread {
 	private ArrayDeque<Document> myPageBufferQueue;
 	private ArrayDeque<Document> myGatherQueue;
 	
+	private int count = 0;
+	
 	public PageParser(ArrayDeque<URL> retrieveQueue, ArrayDeque<Document> bufferQueue, ArrayDeque<Document> theGatherQueue) {
 		myDoc = new Document("");
 		myRetrieveQueue = retrieveQueue;
@@ -44,7 +46,7 @@ public class PageParser extends Thread {
 			
 			synchronized (myRetrieveQueue) {
 				try {
-					placeInPageRetrieve();
+					placeInPageRetrieve(links);
 				} catch (MalformedURLException e) {
 					
 					e.printStackTrace();
@@ -52,7 +54,10 @@ public class PageParser extends Thread {
 			}
 			
 			synchronized (myGatherQueue) {
+				++count;
+				System.out.printf("\nParserCount: %d", count);
 				myGatherQueue.addLast(myDoc);
+				myGatherQueue.notifyAll();
 			}
 			
 		} while(true);
@@ -73,23 +78,22 @@ public class PageParser extends Thread {
 		myPageBufferQueue.notifyAll();
 	}
 	
-	private synchronized void placeInPageRetrieve() throws MalformedURLException {
-		System.out.println("in pageparser before for");
-		System.out.println(myRetrieveQueue);
+	private synchronized void placeInPageRetrieve(Elements links) throws MalformedURLException {
+
 		for (Element link : links) {
+			
 			try {
-				String http = link.attr("abs:href");
+				String http = link.attr("abs:href");	
+				
 				if (!http.equals("http://questioneverything.typepad.com/")) {
-					URL url = new URL(http);
-					myRetrieveQueue.addLast(url);
+					myRetrieveQueue.addLast(new URL(http));
+					//System.out.println(http);
 				}
 					
 			} catch (IOException e) {
 				// Throw away links that don't work
 			}
         }
-		System.out.println("in pageparser");
-		System.out.println(myRetrieveQueue);
 		
 		myRetrieveQueue.notifyAll();
 	}

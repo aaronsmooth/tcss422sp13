@@ -14,11 +14,11 @@ public class PageRetriever extends Thread {
 	private Document myDoc;
 	private ArrayDeque<URL> myRetrieveQueue;
 	private ArrayDeque<Document> myPageBufferQueue;
-	private Integer myLinkCount;
+	private SlaveInteger myLinkCount;						// Passed from Main, decrements counter until 0;
 	private boolean continueRunning;
 
 	public PageRetriever(ArrayDeque<URL> retrieveQueue, ArrayDeque<Document> bufferQueue,
-							Integer linkCount) {
+							SlaveInteger linkCount) {
 
 		myRetrieveQueue = retrieveQueue;
 		myPageBufferQueue = bufferQueue;
@@ -41,18 +41,23 @@ public class PageRetriever extends Thread {
 				myDoc = Jsoup.connect(myURL.toExternalForm()).get();
 				
 				synchronized (myLinkCount) {
-					continueRunning = updateCount();
+					updateCount();
 				}
+				
+				if (continueRunning) {
+					synchronized (myPageBufferQueue) {
+						placeInPageBuffer();
+					}
+				}
+				
 			} catch (IOException e) {
-				System.out.println("\nCouldnt connect to URL!");
-				e.printStackTrace();
+				// Throw away links that don't work
 			}
 			
-			synchronized (myPageBufferQueue) {
-				placeInPageBuffer();
-			}
 			
-		} while(true);
+		} while(continueRunning);
+		
+		System.out.printf("\nI'm dieing! *%s" , this.getName());
 	}
 	
 	private synchronized void retrievePage() {
@@ -75,8 +80,12 @@ public class PageRetriever extends Thread {
 		myPageBufferQueue.notifyAll();
 	}
 	
-	private synchronized boolean updateCount() {
-		myLinkCount++;
+	private synchronized void updateCount() {
+		System.out.printf("\nmyLinkCount: %d	%s", myLinkCount.getVal(), this.getName());
+		myLinkCount.decrement();
 		
+		if (myLinkCount.getVal() <= 0) {
+			continueRunning = false;
+		} 	
 	}
 }

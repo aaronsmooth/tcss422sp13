@@ -29,9 +29,8 @@ public class Main {
 		
 		Map<String, Integer> mainmap = new TreeMap<String, Integer>();
 		final Scanner input = new Scanner(System.in);
-		PageParser pageparser = new PageParser(url_queue, pagebuffer, gatherqueue);
 		
-		Integer linkCount = new Integer(0);
+		SlaveInteger linkCount = new SlaveInteger(100);
 		
 		final String main_url;
 	    int amount;
@@ -46,27 +45,23 @@ public class Main {
 
 		url_queue.addFirst(new URL("http://faculty.washington.edu/gmobus")); //add first URL
 		
+		for (int i = 0; i < 5; i++) {
+			PageRetriever retriever = new PageRetriever(url_queue, pagebuffer, linkCount); //create page retriever
+			retriever.start(); //start the page retriever thread
+		}
 		
-		PageRetriever retriever = new PageRetriever(url_queue, pagebuffer); //create page retriever
-		
-		retriever.start(); //start the page retriever thread
-//		
-//		synchronized (pagebuffer) {
-//			pagebuffer.notifyAll();
-//		}
-//		
-//		while (pagebuffer.isEmpty()) {
-//			System.out.println("waiting");
-//		}
-		
-		
-		Document doc = Jsoup.connect("http://faculty.washington.edu/gmobus/").get();
-		gatherqueue.add(doc);
+		for (int i = 0; i < 5; i++) {
+			PageParser pageparser = new PageParser(url_queue, pagebuffer, gatherqueue);
+			pageparser.start();
+		}
 		
 		DataGatherer data = new DataGatherer(wordlist, gatherqueue, mainmap);
 		
+		Document doc = Jsoup.connect("http://faculty.washington.edu/gmobus/").get();
+		gatherqueue.add(doc);
+			
 		data.start();
-		pageparser.start();
+		
 //		System.out.println(url_queue);
 		//mainmap = data.getMap();
 //		int count = 0;
