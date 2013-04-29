@@ -59,7 +59,8 @@ public class PageRetriever extends Thread {
 						
 		} while(continueRunning);
 		
-		System.out.printf("\nI'm dieing! *%s" , this.getName());
+		System.out.printf("\nI'm dieing! *%s\n" , this.getName());
+		System.out.println(myBigStruct.isDone());
 	}
 	
 	private synchronized void retrievePage() {
@@ -83,11 +84,12 @@ public class PageRetriever extends Thread {
 	}
 	
 	private synchronized void updateCount() {
-		System.out.printf("\nmyLinkCount: %d	%s", myLinkCount.getVal(), this.getName());
+		System.out.printf("\nmyLinkCount: %d	%s\n", myLinkCount.getVal(), this.getName());
 		myLinkCount.decrement();
 		
-		if (myLinkCount.getVal() <= 0) {
+		if (myLinkCount.getVal() < 0) {
 			continueRunning = false;
+			myBigStruct.setDone();
 		} 	
 	}
 }

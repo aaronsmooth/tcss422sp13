@@ -6,12 +6,14 @@ public class BigStruct {
 	private int urlCount;
 	private String urlName;
 	private Document aDoc;
+	private boolean done;
 	
 	public BigStruct(Document theDoc, String theString) {
 		wordCount = 0;
 		urlCount = 0;
 		aDoc = theDoc;
 		urlName = theString;
+		done = false;
 	}
 	
 	public void incrementWordCount() {
@@ -44,5 +46,18 @@ public class BigStruct {
 	
 	public Document getDoc() {
 		return aDoc;
+	}
+	
+	public boolean isDone() {
+		return done;
+	}
+	
+	public void setDone() {
+		done = true;
+	}
+	
+	@Override
+	public String toString() {
+		return urlName;
 	}
 }

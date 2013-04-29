@@ -63,7 +63,7 @@ public class Main {
 			pageparser.start();
 		}
 		
-		DataGatherer data = new DataGatherer(wordlist, gatherqueue, mainmap);
+		DataGatherer data = new DataGatherer(wordlist, gatherqueue, mainmap, System.nanoTime());
 		
 		//Document doc = Jsoup.connect("http://faculty.washington.edu/gmobus/").get();
 		//gatherqueue.add(doc);

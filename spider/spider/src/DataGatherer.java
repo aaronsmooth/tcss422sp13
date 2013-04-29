@@ -9,25 +9,26 @@ public class DataGatherer extends Thread {
 	private int totalWordCount;
 	private int totalUrlCount;
 	private Map<String, Integer> myMap;
-	
 	private ArrayDeque<BigStruct> myGatherer;
-	
 	private BigStruct myBigStruct;
 	private Document myDoc;
-	
 	private int count = 0;
+	private long startTime;
+	private long totalTime;
 	
 	/**
 	 * Constructor.
 	 * @param theList the list of word
 	 */
-	public DataGatherer(final ArrayList<String> theList, ArrayDeque<BigStruct> theGatherQueue, Map<String, Integer> themap) {
+	public DataGatherer(final ArrayList<String> theList, ArrayDeque<BigStruct> theGatherQueue, Map<String, Integer> themap, long theStartTime) {
 		totalUrlCount = 0;
 		totalWordCount = 0;
 		myBigStruct = new BigStruct(null, "");
 		myGatherer = theGatherQueue;
 		myMap = themap;
 		myDoc = new Document("");
+		startTime = theStartTime;
+		totalTime = 0;
 		for (String str : theList) {
 			myMap.put(str, 0);
 		}
@@ -64,17 +65,22 @@ public class DataGatherer extends Thread {
 				++count;
 				//System.out.printf("\nDataCount: %d", count);
 				//System.out.printf("\nQueueCount: %d", myGatherer.size());
+				if (myBigStruct.isDone()) {
+					totalTime = System.nanoTime() - startTime;
+				}
+				
 				totalWordCount = totalWordCount + myBigStruct.getWordCount();
 				totalUrlCount = totalUrlCount + myBigStruct.getUrlCount();
-				System.out.println(myBigStruct.getUrlName());
+				//System.out.println(myBigStruct.getUrlName());
 				System.out.printf("\nTotal word count: %d", totalWordCount);
-				System.out.printf("\nTotal url count: %d", totalUrlCount);
+				System.out.printf("\nTotal url count: %d\n", totalUrlCount);
 				stringscan.close();
 			} catch (NullPointerException e) {
 				// Throw away docs with empty bodies
 			}
-		} while (true);
-	
+		} while (!myBigStruct.isDone());
+		//System.out.println("IM DYING!!!!");
+		System.out.println("Total time: " + totalTime * (Math.pow(10, -9)) + "seconds");
 	
 	}
 

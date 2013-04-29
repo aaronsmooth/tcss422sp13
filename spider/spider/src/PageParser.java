@@ -56,12 +56,13 @@ public class PageParser extends Thread {
 			
 			synchronized (myGatherQueue) {
 				++count;
-				System.out.printf("\nParserCount: %d", count);
+				//System.out.printf("\nParserCount: %d\n", count);
 				myGatherQueue.addLast(myBigStruct);
 				myGatherQueue.notifyAll();
 			}
 			
-		} while(true);
+		} while(!myBigStruct.isDone());
+		System.out.println("MY PARSER HAS CANCER!");
 	}
 	
 	private synchronized void retrieveDoc() {
