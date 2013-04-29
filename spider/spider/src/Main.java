@@ -28,29 +28,37 @@ public class Main {
 		ArrayList<String> wordlist = new ArrayList<String>();
 		
 		Map<String, Integer> mainmap = new TreeMap<String, Integer>();
-		final Scanner input = new Scanner(System.in);
 		
-		SlaveInteger linkCount = new SlaveInteger(100);
-		
+		final Scanner input = new Scanner(System.in);	
 		final String main_url;
+		
 	    int amount;
-	    int numthread;
-	    System.out.print("Number of threads? ");
-	    numthread = input.nextInt();
+	    int parsethreads;
+	    int retrievethreads;
+	    int depth;
+	    System.out.print("Number of Page Retriever Threads? ");
+	    retrievethreads = input.nextInt();
+	    System.out.print("Number of Page Parser Threads? ");
+	    parsethreads = input.nextInt();
 	    System.out.print("How many words do you want to check? ");
 		amount = input.nextInt();
+		System.out.print("How many websites would you like to search through? ");
+		depth = input.nextInt();
 	    main_url = getInput(input, wordlist, amount);
 	    
-	    System.out.println(wordlist);
-
-		url_queue.addFirst(new URL("http://faculty.washington.edu/gmobus")); //add first URL
-		
-		for (int i = 0; i < 5; i++) {
+	    //System.out.println(wordlist);
+	    
+	    url_queue.addFirst(new URL(main_url)); //add first URL
+	    
+	    SlaveInteger linkCount = new SlaveInteger(depth);
+	    
+		//http://faculty.washington.edu/gmobus
+		for (int i = 0; i < retrievethreads; i++) {
 			PageRetriever retriever = new PageRetriever(url_queue, pagebuffer, linkCount); //create page retriever
 			retriever.start(); //start the page retriever thread
 		}
 		
-		for (int i = 0; i < 5; i++) {
+		for (int i = 0; i < parsethreads; i++) {
 			PageParser pageparser = new PageParser(url_queue, pagebuffer, gatherqueue);
 			pageparser.start();
 		}
