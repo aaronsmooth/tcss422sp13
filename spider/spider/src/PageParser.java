@@ -15,14 +15,15 @@ public class PageParser extends Thread {
 	
 	private Document myDoc;
 	private Elements links;
-	
+	private BigStruct myBigStruct;
 	private ArrayDeque<URL> myRetrieveQueue;
-	private ArrayDeque<Document> myPageBufferQueue;
-	private ArrayDeque<Document> myGatherQueue;
+	private ArrayDeque<BigStruct> myPageBufferQueue;
+	private ArrayDeque<BigStruct> myGatherQueue;
 	
 	private int count = 0;
 	
-	public PageParser(ArrayDeque<URL> retrieveQueue, ArrayDeque<Document> bufferQueue, ArrayDeque<Document> theGatherQueue) {
+	public PageParser(ArrayDeque<URL> retrieveQueue, ArrayDeque<BigStruct> bufferQueue, ArrayDeque<BigStruct> theGatherQueue) {
+		myBigStruct = new BigStruct(null, "");
 		myDoc = new Document("");
 		myRetrieveQueue = retrieveQueue;
 		myPageBufferQueue = bufferQueue;
@@ -56,7 +57,7 @@ public class PageParser extends Thread {
 			synchronized (myGatherQueue) {
 				++count;
 				System.out.printf("\nParserCount: %d", count);
-				myGatherQueue.addLast(myDoc);
+				myGatherQueue.addLast(myBigStruct);
 				myGatherQueue.notifyAll();
 			}
 			
@@ -73,8 +74,8 @@ public class PageParser extends Thread {
 				
 			}
 		}
-		
-		myDoc = myPageBufferQueue.removeFirst();
+		myBigStruct = myPageBufferQueue.removeFirst();
+		myDoc = myBigStruct.getDoc();
 		myPageBufferQueue.notifyAll();
 	}
 	
@@ -87,7 +88,8 @@ public class PageParser extends Thread {
 				
 				if (!http.equals("http://questioneverything.typepad.com/")) {
 					myRetrieveQueue.addLast(new URL(http));
-					//System.out.println(http);
+					myBigStruct.incrementUrlCount();
+					
 				}
 					
 			} catch (IOException e) {

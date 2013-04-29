@@ -6,11 +6,13 @@ import org.jsoup.nodes.Document;
 
 
 public class DataGatherer extends Thread {
-	
+	private int totalWordCount;
+	private int totalUrlCount;
 	private Map<String, Integer> myMap;
 	
-	private ArrayDeque<Document> myGatherer;
+	private ArrayDeque<BigStruct> myGatherer;
 	
+	private BigStruct myBigStruct;
 	private Document myDoc;
 	
 	private int count = 0;
@@ -19,8 +21,10 @@ public class DataGatherer extends Thread {
 	 * Constructor.
 	 * @param theList the list of word
 	 */
-	public DataGatherer(final ArrayList<String> theList, ArrayDeque<Document> theGatherQueue, Map<String, Integer> themap) {
-		//myList = theList;
+	public DataGatherer(final ArrayList<String> theList, ArrayDeque<BigStruct> theGatherQueue, Map<String, Integer> themap) {
+		totalUrlCount = 0;
+		totalWordCount = 0;
+		myBigStruct = new BigStruct(null, "");
 		myGatherer = theGatherQueue;
 		myMap = themap;
 		myDoc = new Document("");
@@ -32,36 +36,6 @@ public class DataGatherer extends Thread {
 	public Map<String, Integer> getMap() {
 		return myMap;
 	}
-	
-//	public void SetList(ArrayList<String> theList) {
-//		myList = theList;
-//	}
-	
-	
-//	public Map<String, Integer> buildMap() {
-//		
-//		String theWordinList;
-//		String theWordinTextList;
-//		
-//		for (int i = 0; i < myList.size(); i++) {
-//			theWordinList = myList.get(i).toLowerCase().replaceAll("\\W", "");
-//			
-//			for (int j = 0; j < myTextList.size(); j++) {
-//				theWordinTextList = myTextList.get(j).toLowerCase().replaceAll("\\W", "");
-//				final Integer occurs = myMap.get(theWordinList);
-//				if (theWordinList.equals(theWordinTextList)) {
-//					if (occurs == null) {
-//						myMap.put(theWordinList, 1);
-//					} else {
-//						myMap.put(theWordinList, occurs+1);
-//					}					
-//				}
-//				
-//
-//			}
-//			
-//		}
-//		return myMap;
 
 	public void run() {
 		String texts;
@@ -80,21 +54,25 @@ public class DataGatherer extends Thread {
 	        
 				while (stringscan.hasNext()) {
 					str = stringscan.next().toLowerCase().replaceAll("\\W", "");
+					myBigStruct.incrementWordCount();
 					if (myMap.containsKey(str)) {
 						myMap.put(str, myMap.get(str)+ 1);
 					}
 				}	
-				//System.out.println(texts);
+				
 				System.out.println(myMap);
 				++count;
-				System.out.printf("\nDataCount: %d", count);
-				System.out.printf("\nQueueCount: %d", myGatherer.size());
+				//System.out.printf("\nDataCount: %d", count);
+				//System.out.printf("\nQueueCount: %d", myGatherer.size());
+				totalWordCount = totalWordCount + myBigStruct.getWordCount();
+				totalUrlCount = totalUrlCount + myBigStruct.getUrlCount();
+				System.out.println(myBigStruct.getUrlName());
+				System.out.printf("\nTotal word count: %d", totalWordCount);
+				System.out.printf("\nTotal url count: %d", totalUrlCount);
 				stringscan.close();
 			} catch (NullPointerException e) {
 				// Throw away docs with empty bodies
 			}
-
-			
 		} while (true);
 	
 	
@@ -110,9 +88,16 @@ public class DataGatherer extends Thread {
 
 			}
 		}
-
-		myDoc = myGatherer.removeFirst();
+		myBigStruct = myGatherer.removeFirst();
+		myDoc = myBigStruct.getDoc();
 		myGatherer.notifyAll();
 	}
 	
+	public int getTotalWordCount() {
+		return totalWordCount;
+	}
+	
+	public int getTotalUrlCount() {
+		return totalUrlCount;
+	}
 }

@@ -13,25 +13,26 @@ public class PageRetriever extends Thread {
 	private URL myURL;
 	private Document myDoc;
 	private ArrayDeque<URL> myRetrieveQueue;
-	private ArrayDeque<Document> myPageBufferQueue;
+	private ArrayDeque<BigStruct> myPageBufferQueue;
 	private SlaveInteger myLinkCount;						// Passed from Main, decrements counter until 0;
 	private boolean continueRunning;
+	private BigStruct myBigStruct;
 
-	public PageRetriever(ArrayDeque<URL> retrieveQueue, ArrayDeque<Document> bufferQueue,
+	public PageRetriever(ArrayDeque<URL> retrieveQueue, ArrayDeque<BigStruct> bufferQueue,
 							SlaveInteger linkCount) {
-
+		
 		myRetrieveQueue = retrieveQueue;
 		myPageBufferQueue = bufferQueue;
 		myLinkCount = linkCount;
 		continueRunning = true;
-		
 		try { 
 			myURL = new URL("");
 		} catch (MalformedURLException e) {}
+		
+		myBigStruct =  new BigStruct(null, "");
 	}
 	
 	public void run() {
-		
 		do {
 			synchronized (myRetrieveQueue) {
 				retrievePage();
@@ -45,6 +46,8 @@ public class PageRetriever extends Thread {
 				}
 				
 				if (continueRunning) {
+					myBigStruct.setDoc(myDoc);
+					myBigStruct.setURL(myURL.toString());
 					synchronized (myPageBufferQueue) {
 						placeInPageBuffer();
 					}
@@ -53,8 +56,7 @@ public class PageRetriever extends Thread {
 			} catch (IOException e) {
 				// Throw away links that don't work
 			}
-			
-			
+						
 		} while(continueRunning);
 		
 		System.out.printf("\nI'm dieing! *%s" , this.getName());
@@ -76,7 +78,7 @@ public class PageRetriever extends Thread {
 	}
 	
 	private synchronized void placeInPageBuffer() {
-		myPageBufferQueue.addLast(myDoc);
+		myPageBufferQueue.addLast(myBigStruct);
 		myPageBufferQueue.notifyAll();
 	}
 	

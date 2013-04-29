@@ -23,8 +23,8 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		
 		ArrayDeque<URL> url_queue = new ArrayDeque<>();
-		ArrayDeque<Document> pagebuffer = new ArrayDeque<>();
-		ArrayDeque<Document> gatherqueue = new ArrayDeque<>();
+		ArrayDeque<BigStruct> pagebuffer = new ArrayDeque<>();
+		ArrayDeque<BigStruct> gatherqueue = new ArrayDeque<>();
 		ArrayList<String> wordlist = new ArrayList<String>();
 		
 		Map<String, Integer> mainmap = new TreeMap<String, Integer>();
@@ -65,8 +65,8 @@ public class Main {
 		
 		DataGatherer data = new DataGatherer(wordlist, gatherqueue, mainmap);
 		
-		Document doc = Jsoup.connect("http://faculty.washington.edu/gmobus/").get();
-		gatherqueue.add(doc);
+		//Document doc = Jsoup.connect("http://faculty.washington.edu/gmobus/").get();
+		//gatherqueue.add(doc);
 			
 		data.start();
 		
