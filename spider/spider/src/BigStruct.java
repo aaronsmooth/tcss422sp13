@@ -7,13 +7,23 @@ public class BigStruct {
 	private String urlName;
 	private Document aDoc;
 	private boolean done;
+	private long myParseTime;
 	
 	public BigStruct(Document theDoc, String theString) {
 		wordCount = 0;
 		urlCount = 0;
 		aDoc = theDoc;
 		urlName = theString;
+		myParseTime = 0;
 		done = false;
+	}
+	
+	public void setParseTime(long theTime) {
+		myParseTime = theTime;
+	}
+	
+	public long getParseTime() {
+		return myParseTime;
 	}
 	
 	public void incrementWordCount() {

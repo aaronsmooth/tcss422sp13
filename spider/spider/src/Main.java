@@ -1,6 +1,4 @@
-/*
- * MObus didnt let me enjoy the sun!!!
- */
+
 
 import java.io.IOException;
 import java.net.URL;
@@ -9,9 +7,6 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
-
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 
 
 public class Main {
@@ -42,43 +37,34 @@ public class Main {
 	    parsethreads = input.nextInt();
 	    System.out.print("How many words do you want to check? ");
 		amount = input.nextInt();
+		getInput(input, wordlist, amount);
+		System.out.print("Enter the URL: ");
+		main_url = input.next();
 		System.out.print("How many websites would you like to search through? ");
 		depth = input.nextInt();
-	    main_url = getInput(input, wordlist, amount);
-	    
-	    //System.out.println(wordlist);
-	    
+		while (depth > 10000 || depth <= 0) {
+			System.out.print("How many websites would you like to search through? ");
+			depth = input.nextInt();
+		}
+	    	    
 	    url_queue.addFirst(new URL(main_url)); //add first URL
 	    
 	    SlaveInteger linkCount = new SlaveInteger(depth);
 	    
-		//http://faculty.washington.edu/gmobus
+		// http://faculty.washington.edu/gmobus
 		for (int i = 0; i < retrievethreads; i++) {
 			PageRetriever retriever = new PageRetriever(url_queue, pagebuffer, linkCount); //create page retriever
 			retriever.start(); //start the page retriever thread
 		}
 		
 		for (int i = 0; i < parsethreads; i++) {
-			PageParser pageparser = new PageParser(url_queue, pagebuffer, gatherqueue);
+			PageParser pageparser = new PageParser(url_queue, pagebuffer, gatherqueue, linkCount);
 			pageparser.start();
 		}
 		
-		DataGatherer data = new DataGatherer(wordlist, gatherqueue, mainmap, System.nanoTime());
-		
-		//Document doc = Jsoup.connect("http://faculty.washington.edu/gmobus/").get();
-		//gatherqueue.add(doc);
+		DataGatherer data = new DataGatherer(wordlist, gatherqueue, mainmap, System.nanoTime(), depth, linkCount);
 			
 		data.start();
-		
-//		System.out.println(url_queue);
-		//mainmap = data.getMap();
-//		int count = 0;
-//		do {
-//		System.out.println(mainmap);
-//		count++;
-//		} while (count < 20);
-		
-	    //input.close();
 	}
 	
 	/**
@@ -87,13 +73,10 @@ public class Main {
 	 * @param the_wordlist list of word
 	 * @return the url
 	 */
-	public static String getInput(final Scanner the_input, final ArrayList<String> the_wordlist, int the_amount) {  
+	public static void getInput(final Scanner the_input, final ArrayList<String> the_wordlist, int the_amount) {  
 		for (int i = 0; i < the_amount; i++) {
 			System.out.print("Enter a word: ");
 			the_wordlist.add(the_input.next());
 		}
-		System.out.print("Enter the URL: ");
-		final String url = the_input.next();
-		return url;
 	}
 }

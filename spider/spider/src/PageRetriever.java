@@ -41,10 +41,6 @@ public class PageRetriever extends Thread {
 			try {
 				myDoc = Jsoup.connect(myURL.toExternalForm()).get();
 				
-				//synchronized (myLinkCount) {
-					//updateCount();
-				//}
-				
 				if (continueRunning) {
 					myBigStruct.setDoc(myDoc);
 					myBigStruct.setURL(myURL.toString());
@@ -52,6 +48,8 @@ public class PageRetriever extends Thread {
 						placeInPageBuffer();
 					}
 				}
+				//System.out.println("Retriever link count");
+				//System.out.println(myLinkCount.getVal());
 				synchronized (myLinkCount) {
 					updateCount();
 				}
@@ -62,8 +60,6 @@ public class PageRetriever extends Thread {
 						
 		} while(continueRunning);
 		
-		System.out.printf("\nI'm dieing! *%s\n" , this.getName());
-		System.out.println(myBigStruct.isDone());
 	}
 	
 	private synchronized void retrievePage() {
@@ -87,8 +83,7 @@ public class PageRetriever extends Thread {
 	}
 	
 	private synchronized void updateCount() {
-		System.out.printf("\nmyLinkCount: %d	%s\n", myLinkCount.getVal(), this.getName());
-		myLinkCount.decrement();
+		//myLinkCount.decrement();
 		
 		if (myLinkCount.getVal() <= 0) {
 			continueRunning = false;

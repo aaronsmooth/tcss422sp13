@@ -14,6 +14,10 @@ public class SlaveInteger {
 		myInt++;
 	}
 	
+	public void setVal(int i) {
+		myInt = i;
+	}
+	
 	public int getVal() {
 		return myInt;
 	}
