@@ -6,6 +6,9 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+
 
 public class Main {
 	
@@ -38,7 +41,18 @@ public static void main(String[] args) throws IOException {
 	  
 	    
 	    while (depth > 0 && !url_queue.isEmpty()) {
+	    	URL url = url_queue.getFirst();
+	    	BigStruct data = new BigStruct(null, "");
 	    	
+	    	try {
+				Document doc = Jsoup.connect(url.toExternalForm()).get();
+				
+				data.setDoc(doc);
+				data.setURL(url.toString());
+												
+			} catch (IOException e) {
+				// Throw away links that don't work
+			}
 	    }
 	    
 	}
