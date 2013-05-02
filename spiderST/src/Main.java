@@ -40,7 +40,7 @@ public static void main(String[] args) throws IOException {
 		}
 		
 	    url_queue.addFirst(new URL(main_url)); 
-	  
+	    long totalParseTime = 0;
 	    
 	    while (depth > 0 && !url_queue.isEmpty()) {
 	    	URL url = url_queue.getFirst();
@@ -70,6 +70,83 @@ public static void main(String[] args) throws IOException {
 				}
 				
 				// Data Gatherer section
+				
+				long totalTime = System.nanoTime() - startTime;
+				totalParseTime += data.getParseTime();
+				long totalWordCount = totalWordCount + data.getWordCount();
+				int totalUrlCount = totalUrlCount + data.getUrlCount();
+				
+				try {
+					texts = myDoc.body().text();
+					Scanner stringscan = new Scanner(texts);
+		        
+					while (stringscan.hasNext()) {
+						str = stringscan.next().toLowerCase().replaceAll("\\W", "");
+						myBigStruct.incrementWordCount();
+						if (myMap.containsKey(str)) {
+							myMap.put(str, myMap.get(str)+ 1);
+						}
+					}	
+					
+					totalTime = System.nanoTime() - startTime;
+					totalParseTime += myBigStruct.getParseTime();
+					totalWordCount = totalWordCount + myBigStruct.getWordCount();
+					totalUrlCount = totalUrlCount + myBigStruct.getUrlCount();
+					/*Parsed: www.tacoma.washington.edu/calendar/
+						Pages Retrieved: 12
+						Average words per page: 321
+						Average URLs per page: 11
+						Keyword               Ave. hits per page       Total hits
+						  albatross               0.001                     3
+						  carrots                 0.01                      5
+						  everywhere              1.23                      19
+						  etc..........
+						
+						  intelligence            0.000                     0
+						
+						Page limit: 5000
+						Average parse time per page .001msec
+						Total running time:       0.96 sec
+										 */
+				
+				
+					System.out.printf("\n\n\n");
+					System.out.println("Parsed: " + data.getUrlName());
+					System.out.println("Pages Retrieved: " + retrieveCount);
+					System.out.println("Average Words Per Page: " + (totalWordCount / retrieveCount));
+					System.out.println("Average URL's per page: " + (totalUrlCount / retrieveCount));
+					System.out.printf("Keyword \tAvg. hits per page \tTotal hits\n");
+					
+					for (Map.Entry<String, Integer> word : myMap.entrySet()) {
+						System.out.printf("  %-20s %-20d %-20d\n", word.getKey(), word.getValue() / retrieveCount, word.getValue());
+					}
+					System.out.println("Page limit: " + count);
+					System.out.printf("Average parse time per page: %.4f seconds\n", (totalParseTime / retrieveCount) * (Math.pow(10, -9)));
+					System.out.printf("Total running time: %.4f seconds\n", (totalTime * (Math.pow(10, -9))));
+					stringscan.close();
+					
+					
+					// Printing the data to a file
+					/*
+					ps.printf("\n\n\n");
+					ps.println("Parsed: " + myBigStruct.getUrlName());
+					ps.println("Pages Retrieved: " + retrieveCount);
+					ps.println("Average Words Per Page: " + (totalWordCount / retrieveCount));
+					ps.println("Average URL's per page: " + (totalUrlCount / retrieveCount));
+					ps.printf("Keyword \tAvg. hits per page \tTotal hits\n");
+					
+					for (Map.Entry<String, Integer> word : myMap.entrySet()) {
+						ps.printf("  %-20s %-20d %-20d\n", word.getKey(), word.getValue() / retrieveCount, word.getValue());
+					}
+					ps.println("Page limit: " + count);
+					ps.printf("Average parse time per page: %.4f seconds\n", (totalParseTime / retrieveCount) * (Math.pow(10, -9)));
+					ps.printf("Total running time: %.4f seconds\n", (totalTime * (Math.pow(10, -9))));
+					*/			
+					
+					
+				} catch (NullPointerException e) {
+					// Throw away docs with empty bodies
+				}
 				
 				depth--;
 												
