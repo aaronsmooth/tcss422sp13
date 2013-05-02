@@ -103,7 +103,7 @@ public static void main(String[] args) throws IOException {
 					}	
 					
 					totalTime = System.nanoTime() - startTime;
-					totalParseTime += data.getParseTime();
+					totalParseTime += System.nanoTime() - data.getParseTime();
 					totalWordCount = totalWordCount + data.getWordCount();
 					totalUrlCount = totalUrlCount + data.getUrlCount();
 					/*Parsed: www.tacoma.washington.edu/calendar/
