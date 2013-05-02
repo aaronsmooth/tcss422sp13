@@ -102,10 +102,10 @@ public class Main {
 	    	System.out.print(thetxt);
 	    	if (console.hasNextInt()) {
 	    		result = console.nextInt();
-	    		if (result  <= MAXDEPTH && result  > 0) {
+	    		if (result  <= MAXDEPTH && result  >= 0) {
 	    			validinput = true;
 	    		} else {
-	    			System.out.println("That is not a valid size! Must be a positive value, maximum value allowed is 10,000! ");
+	    			System.out.println("That is not a valid size! Must be a zero or greater, maximum value allowed is 10,000!/n Enter 0 for the max value. ");
 	    		}
 	    	} else {
 	    		System.out.println("Invalid entry! Must be an integer value! ");
