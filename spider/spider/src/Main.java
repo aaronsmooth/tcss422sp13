@@ -27,25 +27,13 @@ public class Main {
 		final Scanner input = new Scanner(System.in);	
 		final String main_url;
 		
-	    int amount;
-	    int parsethreads;
-	    int retrievethreads;
-	    int depth;
-	    System.out.print("Number of Page Retriever Threads? ");
-	    retrievethreads = input.nextInt();
-	    System.out.print("Number of Page Parser Threads? ");
-	    parsethreads = input.nextInt();
-	    System.out.print("How many words do you want to check? ");
-		amount = input.nextInt();
+		int retrievethreads = gettingInput("Number of Page Retriever Threads? ");
+		int parsethreads = gettingInput("Number of Page Parser Threads? ");
+	    int amount = gettingInput("How many words do you want to check? ");
 		getInput(input, wordlist, amount);
 		System.out.print("Enter the URL: ");
 		main_url = input.next();
-		System.out.print("How many websites would you like to search through? ");
-		depth = input.nextInt();
-		while (depth > 10000 || depth <= 0) {
-			System.out.print("How many websites would you like to search through? ");
-			depth = input.nextInt();
-		}
+		int depth = gettingDepth("How many websites would you like to search through? ");
 	    	    
 	    url_queue.addFirst(new URL(main_url)); //add first URL
 	    
@@ -78,5 +66,46 @@ public class Main {
 			System.out.print("Enter a word: ");
 			the_wordlist.add(the_input.next());
 		}
+	}
+
+
+	public static int gettingInput(String thetxt) {
+	    boolean validinput = false;
+	    int result = 0;
+	    while (validinput == false) {
+	    	Scanner console = new Scanner(System.in);
+	    	System.out.print(thetxt);
+	    	if (console.hasNextInt()) {
+	    		result = console.nextInt();
+	    		if (result >= 1) {
+	    			validinput = true;
+	    		} else {
+	    			System.out.println("That is not a valid size! Must be a value greater than 0! ");
+	    		}
+	    	} else {
+	    		System.out.println("Invalid entry! Must be an integer value! ");
+	    	}
+	    }
+	    return result;
+	}
+	
+	public static int gettingDepth(String thetxt) {
+	    boolean validinput = false;
+	    int result = 0;
+	    while (validinput == false) {
+	    	Scanner console = new Scanner(System.in);
+	    	System.out.print(thetxt);
+	    	if (console.hasNextInt()) {
+	    		result = console.nextInt();
+	    		if (result  <= 10000 && result  > 0) {
+	    			validinput = true;
+	    		} else {
+	    			System.out.println("That is not a valid size! Must be a positive value, maximum value allowed is 10,000! ");
+	    		}
+	    	} else {
+	    		System.out.println("Invalid entry! Must be an integer value! ");
+	    	}
+	    }
+	    return result;
 	}
 }
