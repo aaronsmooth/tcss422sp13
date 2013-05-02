@@ -1,0 +1,554 @@
+
+
+
+Parsed: http://faculty.washington.edu/gmobus
+Pages Retrieved: 1
+Average Words Per Page: 598
+Average URL's per page: 18
+Keyword 	Avg. hits per page 	Total hits
+  agent                0                    0                   
+  intelligent          0                    0                   
+Page limit: 20
+Average parse time per page: 0.0658 seconds
+Total running time: 0.6330 seconds
+
+
+
+Parsed: http://www.tacoma.washington.edu/tech/
+Pages Retrieved: 2
+Average Words Per Page: 646
+Average URL's per page: 124
+Keyword 	Avg. hits per page 	Total hits
+  agent                0                    0                   
+  intelligent          0                    0                   
+Page limit: 20
+Average parse time per page: 0.0738 seconds
+Total running time: 1.2720 seconds
+
+
+
+Parsed: http://www.tacoma.washington.edu/
+Pages Retrieved: 3
+Average Words Per Page: 848
+Average URL's per page: 191
+Keyword 	Avg. hits per page 	Total hits
+  agent                0                    0                   
+  intelligent          0                    0                   
+Page limit: 20
+Average parse time per page: 0.0829 seconds
+Total running time: 1.8730 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/vitae.html
+Pages Retrieved: 4
+Average Words Per Page: 1153
+Average URL's per page: 145
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    4                   
+  intelligent          0                    0                   
+Page limit: 20
+Average parse time per page: 0.0804 seconds
+Total running time: 2.2974 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/schedule.html
+Pages Retrieved: 5
+Average Words Per Page: 950
+Average URL's per page: 118
+Keyword 	Avg. hits per page 	Total hits
+  agent                0                    4                   
+  intelligent          0                    0                   
+Page limit: 20
+Average parse time per page: 0.0654 seconds
+Total running time: 2.3597 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/teaching.html
+Pages Retrieved: 6
+Average Words Per Page: 834
+Average URL's per page: 102
+Keyword 	Avg. hits per page 	Total hits
+  agent                0                    4                   
+  intelligent          0                    1                   
+Page limit: 20
+Average parse time per page: 0.0558 seconds
+Total running time: 2.4303 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/research.html
+Pages Retrieved: 7
+Average Words Per Page: 1103
+Average URL's per page: 91
+Keyword 	Avg. hits per page 	Total hits
+  agent                0                    6                   
+  intelligent          0                    2                   
+Page limit: 20
+Average parse time per page: 0.0557 seconds
+Total running time: 2.6013 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/publications.html
+Pages Retrieved: 8
+Average Words Per Page: 1245
+Average URL's per page: 83
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    12                  
+  intelligent          1                    8                   
+Page limit: 20
+Average parse time per page: 0.0585 seconds
+Total running time: 2.7765 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/resources.html
+Pages Retrieved: 9
+Average Words Per Page: 1174
+Average URL's per page: 86
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    17                  
+  intelligent          1                    13                  
+Page limit: 20
+Average parse time per page: 0.0532 seconds
+Total running time: 2.8743 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/AdaptiveAgents/
+Pages Retrieved: 10
+Average Words Per Page: 1084
+Average URL's per page: 78
+Keyword 	Avg. hits per page 	Total hits
+  agent                2                    21                  
+  intelligent          1                    15                  
+Page limit: 20
+Average parse time per page: 0.0481 seconds
+Total running time: 2.9501 seconds
+
+
+
+Parsed: http://www.youtube.com/watch?v=6OLPL5p0fMg
+Pages Retrieved: 11
+Average Words Per Page: 1159
+Average URL's per page: 83
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    21                  
+  intelligent          1                    15                  
+Page limit: 20
+Average parse time per page: 0.0463 seconds
+Total running time: 3.7952 seconds
+
+
+
+Parsed: http://kcts9.org/education/science-cafe/energy-economy
+Pages Retrieved: 12
+Average Words Per Page: 1120
+Average URL's per page: 88
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    21                  
+  intelligent          1                    15                  
+Page limit: 20
+Average parse time per page: 0.0434 seconds
+Total running time: 4.0606 seconds
+
+
+
+Parsed: https://sites.google.com/site/biophysicaleconomics/
+Pages Retrieved: 13
+Average Words Per Page: 1039
+Average URL's per page: 82
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    21                  
+  intelligent          1                    15                  
+Page limit: 20
+Average parse time per page: 0.0403 seconds
+Total running time: 5.0977 seconds
+
+
+
+Parsed: http://www.pacsci.org/sciencecafe/tacoma/
+Pages Retrieved: 14
+Average Words Per Page: 1014
+Average URL's per page: 83
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    21                  
+  intelligent          1                    15                  
+Page limit: 20
+Average parse time per page: 0.0386 seconds
+Total running time: 6.0364 seconds
+
+
+
+Parsed: http://www.tacoma.washington.edu/tech/
+Pages Retrieved: 15
+Average Words Per Page: 992
+Average URL's per page: 93
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    21                  
+  intelligent          1                    15                  
+Page limit: 20
+Average parse time per page: 0.0381 seconds
+Total running time: 6.5765 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/research.html#dynsysmod
+Pages Retrieved: 16
+Average Words Per Page: 1101
+Average URL's per page: 89
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    23                  
+  intelligent          1                    16                  
+Page limit: 20
+Average parse time per page: 0.0388 seconds
+Total running time: 6.7351 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/research.html#sapience
+Pages Retrieved: 17
+Average Words Per Page: 1196
+Average URL's per page: 85
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    25                  
+  intelligent          1                    17                  
+Page limit: 20
+Average parse time per page: 0.0387 seconds
+Total running time: 6.8681 seconds
+
+
+
+Parsed: http://www.tacoma.uw.edu/
+Pages Retrieved: 18
+Average Words Per Page: 1199
+Average URL's per page: 99
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    25                  
+  intelligent          0                    17                  
+Page limit: 20
+Average parse time per page: 0.0379 seconds
+Total running time: 7.1080 seconds
+
+
+
+Parsed: http://www.tacoma.uw.edu/institute-technology
+Pages Retrieved: 19
+Average Words Per Page: 1173
+Average URL's per page: 105
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    25                  
+  intelligent          0                    17                  
+Page limit: 20
+Average parse time per page: 0.0369 seconds
+Total running time: 7.2963 seconds
+
+
+
+Parsed: http://www.tacoma.uw.edu/library
+Pages Retrieved: 20
+Average Words Per Page: 1134
+Average URL's per page: 107
+Keyword 	Avg. hits per page 	Total hits
+  agent                1                    25                  
+  intelligent          0                    17                  
+Page limit: 20
+Average parse time per page: 0.0354 seconds
+Total running time: 7.5095 seconds
+
+
+------------------------------------------------------------------------
+
+Average parse time per page: 0.0354 seconds
+
+Total time: 7.509516378000001 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus
+Pages Retrieved: 1
+Average Words Per Page: 598
+Average URL's per page: 18
+Keyword 	Avg. hits per page 	Total hits
+  mobus                1                    1                   
+  of                   19                   19                  
+  the                  30                   30                  
+Page limit: 20
+Average parse time per page: 0.0674 seconds
+Total running time: 0.5955 seconds
+
+
+
+Parsed: http://www.tacoma.washington.edu/tech/
+Pages Retrieved: 2
+Average Words Per Page: 646
+Average URL's per page: 124
+Keyword 	Avg. hits per page 	Total hits
+  mobus                0                    1                   
+  of                   18                   37                  
+  the                  21                   42                  
+Page limit: 20
+Average parse time per page: 0.0746 seconds
+Total running time: 1.1056 seconds
+
+
+
+Parsed: http://www.tacoma.washington.edu/
+Pages Retrieved: 3
+Average Words Per Page: 848
+Average URL's per page: 191
+Keyword 	Avg. hits per page 	Total hits
+  mobus                0                    1                   
+  of                   21                   63                  
+  the                  20                   60                  
+Page limit: 20
+Average parse time per page: 0.0850 seconds
+Total running time: 1.5113 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/vitae.html
+Pages Retrieved: 4
+Average Words Per Page: 1153
+Average URL's per page: 145
+Keyword 	Avg. hits per page 	Total hits
+  mobus                7                    29                  
+  of                   35                   141                 
+  the                  36                   146                 
+Page limit: 20
+Average parse time per page: 0.0796 seconds
+Total running time: 1.9289 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/schedule.html
+Pages Retrieved: 5
+Average Words Per Page: 950
+Average URL's per page: 118
+Keyword 	Avg. hits per page 	Total hits
+  mobus                6                    30                  
+  of                   28                   142                 
+  the                  29                   147                 
+Page limit: 20
+Average parse time per page: 0.0647 seconds
+Total running time: 1.9960 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/teaching.html
+Pages Retrieved: 6
+Average Words Per Page: 834
+Average URL's per page: 102
+Keyword 	Avg. hits per page 	Total hits
+  mobus                5                    31                  
+  of                   25                   151                 
+  the                  25                   151                 
+Page limit: 20
+Average parse time per page: 0.0554 seconds
+Total running time: 2.0762 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/research.html
+Pages Retrieved: 7
+Average Words Per Page: 1103
+Average URL's per page: 91
+Keyword 	Avg. hits per page 	Total hits
+  mobus                4                    32                  
+  of                   36                   252                 
+  the                  41                   290                 
+Page limit: 20
+Average parse time per page: 0.0607 seconds
+Total running time: 2.2910 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/publications.html
+Pages Retrieved: 8
+Average Words Per Page: 1245
+Average URL's per page: 83
+Keyword 	Avg. hits per page 	Total hits
+  mobus                5                    45                  
+  of                   43                   350                 
+  the                  50                   401                 
+Page limit: 20
+Average parse time per page: 0.0600 seconds
+Total running time: 2.4364 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/resources.html
+Pages Retrieved: 9
+Average Words Per Page: 1174
+Average URL's per page: 86
+Keyword 	Avg. hits per page 	Total hits
+  mobus                5                    47                  
+  of                   40                   366                 
+  the                  46                   414                 
+Page limit: 20
+Average parse time per page: 0.0546 seconds
+Total running time: 2.5469 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/AdaptiveAgents/
+Pages Retrieved: 10
+Average Words Per Page: 1084
+Average URL's per page: 78
+Keyword 	Avg. hits per page 	Total hits
+  mobus                4                    47                  
+  of                   37                   376                 
+  the                  43                   433                 
+Page limit: 20
+Average parse time per page: 0.0495 seconds
+Total running time: 2.6421 seconds
+
+
+
+Parsed: http://kcts9.org/education/science-cafe/energy-economy
+Pages Retrieved: 11
+Average Words Per Page: 1048
+Average URL's per page: 83
+Keyword 	Avg. hits per page 	Total hits
+  mobus                4                    48                  
+  of                   34                   384                 
+  the                  41                   452                 
+Page limit: 20
+Average parse time per page: 0.0460 seconds
+Total running time: 5.8870 seconds
+
+
+
+Parsed: https://sites.google.com/site/biophysicaleconomics/
+Pages Retrieved: 12
+Average Words Per Page: 966
+Average URL's per page: 77
+Keyword 	Avg. hits per page 	Total hits
+  mobus                4                    48                  
+  of                   32                   385                 
+  the                  37                   455                 
+Page limit: 20
+Average parse time per page: 0.0424 seconds
+Total running time: 7.1631 seconds
+
+
+
+Parsed: http://www.pacsci.org/sciencecafe/tacoma/
+Pages Retrieved: 13
+Average Words Per Page: 945
+Average URL's per page: 79
+Keyword 	Avg. hits per page 	Total hits
+  mobus                3                    48                  
+  of                   30                   396                 
+  the                  37                   481                 
+Page limit: 20
+Average parse time per page: 0.0403 seconds
+Total running time: 8.3423 seconds
+
+
+
+Parsed: http://www.tacoma.washington.edu/tech/
+Pages Retrieved: 14
+Average Words Per Page: 927
+Average URL's per page: 89
+Keyword 	Avg. hits per page 	Total hits
+  mobus                3                    48                  
+  of                   29                   414                 
+  the                  35                   493                 
+Page limit: 20
+Average parse time per page: 0.0423 seconds
+Total running time: 8.7406 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/research.html#dynsysmod
+Pages Retrieved: 15
+Average Words Per Page: 1046
+Average URL's per page: 85
+Keyword 	Avg. hits per page 	Total hits
+  mobus                3                    49                  
+  of                   34                   515                 
+  the                  42                   632                 
+Page limit: 20
+Average parse time per page: 0.0403 seconds
+Total running time: 8.8488 seconds
+
+
+
+Parsed: http://faculty.washington.edu/gmobus/research.html#sapience
+Pages Retrieved: 16
+Average Words Per Page: 1151
+Average URL's per page: 82
+Keyword 	Avg. hits per page 	Total hits
+  mobus                3                    50                  
+  of                   38                   616                 
+  the                  48                   771                 
+Page limit: 20
+Average parse time per page: 0.0385 seconds
+Total running time: 8.9424 seconds
+
+
+
+Parsed: http://www.tacoma.uw.edu/
+Pages Retrieved: 17
+Average Words Per Page: 1157
+Average URL's per page: 96
+Keyword 	Avg. hits per page 	Total hits
+  mobus                2                    50                  
+  of                   37                   642                 
+  the                  46                   789                 
+Page limit: 20
+Average parse time per page: 0.0378 seconds
+Total running time: 9.1631 seconds
+
+
+
+Parsed: http://www.tacoma.uw.edu/institute-technology
+Pages Retrieved: 18
+Average Words Per Page: 1131
+Average URL's per page: 104
+Keyword 	Avg. hits per page 	Total hits
+  mobus                2                    50                  
+  of                   36                   660                 
+  the                  44                   801                 
+Page limit: 20
+Average parse time per page: 0.0369 seconds
+Total running time: 9.3301 seconds
+
+
+
+Parsed: http://www.tacoma.uw.edu/library
+Pages Retrieved: 19
+Average Words Per Page: 1093
+Average URL's per page: 105
+Keyword 	Avg. hits per page 	Total hits
+  mobus                2                    50                  
+  of                   35                   665                 
+  the                  42                   808                 
+Page limit: 20
+Average parse time per page: 0.0356 seconds
+Total running time: 9.4919 seconds
+
+
+
+Parsed: http://www.tacoma.washington.edu/directory
+Pages Retrieved: 20
+Average Words Per Page: 1067
+Average URL's per page: 113
+Keyword 	Avg. hits per page 	Total hits
+  mobus                2                    50                  
+  of                   33                   678                 
+  the                  40                   813                 
+Page limit: 20
+Average parse time per page: 0.0350 seconds
+Total running time: 9.9451 seconds
+
+
+------------------------------------------------------------------------
+
+Average parse time per page: 0.0350 seconds
+
+Total time: 9.945086088 seconds
