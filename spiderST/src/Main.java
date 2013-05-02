@@ -55,6 +55,7 @@ public static void main(String[] args) throws IOException {
 				Document doc = Jsoup.connect(url.toExternalForm()).get();
 				
 				data.setDoc(doc);
+				retrieveCount++;
 				data.setURL(url.toString());
 				
 				//Page parser section
