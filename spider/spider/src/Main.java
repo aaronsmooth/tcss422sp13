@@ -10,6 +10,8 @@ import java.util.TreeMap;
 
 
 public class Main {
+	
+	private static int MAXDEPTH = 10000;
 
 	/**
 	 * @param args
@@ -34,6 +36,9 @@ public class Main {
 		System.out.print("Enter the URL: ");
 		main_url = input.next();
 		int depth = gettingDepth("How many websites would you like to search through? ");
+		if (depth == 0) {
+			depth = MAXDEPTH;
+		}
 	    	    
 	    url_queue.addFirst(new URL(main_url)); //add first URL
 	    
@@ -97,7 +102,7 @@ public class Main {
 	    	System.out.print(thetxt);
 	    	if (console.hasNextInt()) {
 	    		result = console.nextInt();
-	    		if (result  <= 10000 && result  > 0) {
+	    		if (result  <= MAXDEPTH && result  > 0) {
 	    			validinput = true;
 	    		} else {
 	    			System.out.println("That is not a valid size! Must be a positive value, maximum value allowed is 10,000! ");
