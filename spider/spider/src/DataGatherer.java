@@ -1,3 +1,12 @@
+/*
+ * Quan Le
+ * Tyler Powers
+ * Aaron Nelson
+ * Seth Kramer
+ * Team Robbins Egg Blue Dolphins
+ * 05/02/2013
+ */
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
@@ -8,23 +17,79 @@ import java.util.Scanner;
 
 import org.jsoup.nodes.Document;
 
-
+/**
+ * DataGatherere class will collect data from PageRetriever and PageParser.
+ * It will then produce the data report.
+ * 
+ * @author Quan Le
+ * @author Tyler Powers
+ * @author Aaron Nelson
+ * @author Seth Kramer
+ * @version 1.0
+ */
 public class DataGatherer extends Thread {
+	/**
+	 * Total number of words.
+	 */
 	private int totalWordCount;
+	
+	/**
+	 * Total of url links.
+	 */
 	private int totalUrlCount;
+	
+	/**
+	 * Map holds words and how many times they occur.
+	 */
 	private Map<String, Integer> myMap;
+	
+	/**
+	 * BigStruct queue.
+	 */
 	private ArrayDeque<BigStruct> myGatherer;
+	
+	/**
+	 * BigStruct hold data for DataGatherer.
+	 */
 	private BigStruct myBigStruct;
+	
+	/**
+	 * A document.
+	 */
 	private Document myDoc;
+	
+	/**
+	 * A count integer.
+	 */
 	private int count;
+	
+	/**
+	 * Start time of the program.
+	 */
 	private long startTime;
+	
+	/**
+	 * Total running time of the program.
+	 */
 	private long totalTime;
+	
+	/**
+	 * Total parse time of the program.
+	 */
 	private long totalParseTime;
+	
+	/**
+	 * Page limit.
+	 */
 	private SlaveInteger linkCount;
+	
+	/**
+	 * Condition variable.
+	 */
 	private boolean continueRunning;
 	
 	/**
-	 * Constructor.
+	 * Constructor of the DataGatherer.
 	 * @param theList the list of word
 	 */
 	public DataGatherer(final ArrayList<String> theList, ArrayDeque<BigStruct> theGatherQueue, Map<String, Integer> themap, long theStartTime, int theTotalLinks, SlaveInteger theLinkCount) {
@@ -45,10 +110,18 @@ public class DataGatherer extends Thread {
 		}
 	}
 	
+	/**
+	 * Returns a map contains words and their amount.
+	 * @return a map
+	 */
 	public Map<String, Integer> getMap() {
 		return myMap;
 	}
 
+	/**
+	 * Implements run() method of Thread class.
+	 * Collects data and produces data reports.
+	 */
 	public void run() {
 		String texts;
 		int retrieveCount = 0;
@@ -175,6 +248,10 @@ public class DataGatherer extends Thread {
 	
 	}
 
+	/**
+	 * Helper method for run().
+	 * Retrieves documents from url links.
+	 */
 	private synchronized void retrieveDoc() {
 
 		while (myGatherer.isEmpty()) {
@@ -190,14 +267,25 @@ public class DataGatherer extends Thread {
 		myGatherer.notifyAll();
 	}
 	
+	/**
+	 * Returns the total word count.
+	 * @return the total word count
+	 */
 	public int getTotalWordCount() {
 		return totalWordCount;
 	}
 	
+	/**
+	 * Returns the total url link count.
+	 * @return
+	 */
 	public int getTotalUrlCount() {
 		return totalUrlCount;
 	}
 	
+	/**
+	 * Helper method for run(), updating the count to stop the program.
+	 */
 	private synchronized void updateCount() {
 		linkCount.decrement();
 		

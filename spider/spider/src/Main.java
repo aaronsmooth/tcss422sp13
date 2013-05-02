@@ -1,4 +1,11 @@
-
+/*
+ * Quan Le
+ * Tyler Powers
+ * Aaron Nelson
+ * Seth Kramer
+ * Team Robbins Egg Blue Dolphins
+ * 05/02/2013
+ */
 
 import java.io.IOException;
 import java.net.URL;
@@ -8,13 +15,27 @@ import java.util.Map;
 import java.util.Scanner;
 import java.util.TreeMap;
 
-
+/**
+ * Main class of the Webcrawler program.
+ * Starts up the program.
+ * 
+ * @author Quan Le
+ * @author Tyler Powers
+ * @author Aaron Nelson
+ * @author Seth Kramer
+ * @version 1.0
+ */
 public class Main {
 	
+	/**
+	 * A constant which is the maximum website this program will run. 
+	 */
 	private static int MAXDEPTH = 10000;
 
 	/**
-	 * @param args
+	 * Main method that will runs the program.
+	 * 
+	 * @param args the arguments
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
@@ -23,12 +44,9 @@ public class Main {
 		ArrayDeque<BigStruct> pagebuffer = new ArrayDeque<>();
 		ArrayDeque<BigStruct> gatherqueue = new ArrayDeque<>();
 		ArrayList<String> wordlist = new ArrayList<String>();
-		
 		Map<String, Integer> mainmap = new TreeMap<String, Integer>();
-		
 		final Scanner input = new Scanner(System.in);	
 		final String main_url;
-		
 		int retrievethreads = gettingInput("Number of Page Retriever Threads? ");
 		int parsethreads = gettingInput("Number of Page Parser Threads? ");
 	    int amount = gettingInput("How many words do you want to check? ");
@@ -39,15 +57,13 @@ public class Main {
 		if (depth == 0) {
 			depth = MAXDEPTH;
 		}
-	    	    
-	    url_queue.addFirst(new URL(main_url)); //add first URL
-	    
+	    url_queue.addFirst(new URL(main_url)); 
 	    SlaveInteger linkCount = new SlaveInteger(depth);
 	    
 		// http://faculty.washington.edu/gmobus
 		for (int i = 0; i < retrievethreads; i++) {
-			PageRetriever retriever = new PageRetriever(url_queue, pagebuffer, linkCount); //create page retriever
-			retriever.start(); //start the page retriever thread
+			PageRetriever retriever = new PageRetriever(url_queue, pagebuffer, linkCount); 
+			retriever.start();
 		}
 		
 		for (int i = 0; i < parsethreads; i++) {
@@ -56,12 +72,11 @@ public class Main {
 		}
 		
 		DataGatherer data = new DataGatherer(wordlist, gatherqueue, mainmap, System.nanoTime(), depth, linkCount);
-			
 		data.start();
 	}
 	
 	/**
-	 * getInput() helper method.
+	 * getInput() helper method gets the list of words from user input.
 	 * @param the_input the input
 	 * @param the_wordlist list of word
 	 * @return the url
@@ -73,7 +88,12 @@ public class Main {
 		}
 	}
 
-
+	/**
+	 * Checks for valid input.
+	 * If not, it will prompt users for the input again.
+	 * @param thetxt the text
+	 * @return integer
+	 */
 	public static int gettingInput(String thetxt) {
 	    boolean validinput = false;
 	    int result = 0;
@@ -94,6 +114,11 @@ public class Main {
 	    return result;
 	}
 	
+	/**
+	 * Another helper method checks for valid input.
+	 * @param thetxt the text
+	 * @return integer
+	 */
 	public static int gettingDepth(String thetxt) {
 	    boolean validinput = false;
 	    int result = 0;
