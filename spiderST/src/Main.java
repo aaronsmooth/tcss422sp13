@@ -67,8 +67,10 @@ public static void main(String[] args) throws IOException {
 					} catch (IOException e) {
 						// Throw away links that don't work
 					}
+				}
 				
 				// Data Gatherer section
+				
 				depth--;
 												
 			} catch (IOException e) {
