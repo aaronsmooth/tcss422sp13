@@ -33,6 +33,7 @@ public static void main(String[] args) throws IOException {
 		long totalWordCount = 0;
 		int totalUrlCount = 0;
 		final String main_url;
+		//int pagelimit;
 	    int amount = gettingInput("How many words do you want to check? ");
 		getInput(input, wordlist, amount);
 		System.out.print("Enter the URL: ");
@@ -42,12 +43,16 @@ public static void main(String[] args) throws IOException {
 		if (depth == 0) {
 			depth = MAXDEPTH;
 		}
+		//pagelimit = depth;
 		
 	    url_queue.addFirst(new URL(main_url)); 
 	    long totalParseTime = 0;
 	    long startTime = System.nanoTime();
+	    for (String str : wordlist) {
+			mainmap.put(str, 0);
+		}
 	    while (depth > 0 && !url_queue.isEmpty()) {
-	    	URL url = url_queue.getFirst();
+	    	URL url = url_queue.removeFirst();
 	    	BigStruct data = new BigStruct(null, "");
 	    	
 	    	try {
@@ -75,13 +80,14 @@ public static void main(String[] args) throws IOException {
 				}
 				
 				// Data Gatherer section
-				for (String str : wordlist) {
-					mainmap.put(str, 0);
-				}
+				//retrieveCount++;
+				//for (String str : wordlist) {
+					//mainmap.put(str, 0);
+				//}
 				long totalTime = System.nanoTime() - startTime;
-				totalParseTime += data.getParseTime();
-				totalWordCount = totalWordCount + data.getWordCount();
-				totalUrlCount = totalUrlCount + data.getUrlCount();
+//				totalParseTime += data.getParseTime();
+//				totalWordCount = totalWordCount + data.getWordCount();
+//				totalUrlCount = totalUrlCount + data.getUrlCount();
 				String str;
 				
 				try {
@@ -128,7 +134,6 @@ public static void main(String[] args) throws IOException {
 					for (Map.Entry<String, Integer> word : mainmap.entrySet()) {
 						System.out.printf("  %-20s %-20d %-20d\n", word.getKey(), word.getValue() / retrieveCount, word.getValue());
 					}
-					System.out.println("Page limit: " + depth);
 					System.out.printf("Average parse time per page: %.4f seconds\n", (totalParseTime / retrieveCount) * (Math.pow(10, -9)));
 					System.out.printf("Total running time: %.4f seconds\n", (totalTime * (Math.pow(10, -9))));
 					stringscan.close();
