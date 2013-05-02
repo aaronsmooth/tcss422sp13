@@ -29,6 +29,9 @@ public static void main(String[] args) throws IOException {
 		
 		final Scanner input = new Scanner(System.in);	
 		String texts;
+		int retrieveCount = 0;
+		long totalWordCount = 0;
+		int totalUrlCount = 0;
 		final String main_url;
 	    int amount = gettingInput("How many words do you want to check? ");
 		getInput(input, wordlist, amount);
@@ -42,7 +45,7 @@ public static void main(String[] args) throws IOException {
 		
 	    url_queue.addFirst(new URL(main_url)); 
 	    long totalParseTime = 0;
-	    
+	    long startTime = System.nanoTime();
 	    while (depth > 0 && !url_queue.isEmpty()) {
 	    	URL url = url_queue.getFirst();
 	    	BigStruct data = new BigStruct(null, "");
@@ -76,8 +79,8 @@ public static void main(String[] args) throws IOException {
 				}
 				long totalTime = System.nanoTime() - startTime;
 				totalParseTime += data.getParseTime();
-				long totalWordCount = totalWordCount + data.getWordCount();
-				int totalUrlCount = totalUrlCount + data.getUrlCount();
+				totalWordCount = totalWordCount + data.getWordCount();
+				totalUrlCount = totalUrlCount + data.getUrlCount();
 				String str;
 				
 				try {
@@ -86,16 +89,16 @@ public static void main(String[] args) throws IOException {
 		        
 					while (stringscan.hasNext()) {
 						str = stringscan.next().toLowerCase().replaceAll("\\W", "");
-						myBigStruct.incrementWordCount();
+						data.incrementWordCount();
 						if (mainmap.containsKey(str)) {
 							mainmap.put(str, mainmap.get(str)+ 1);
 						}
 					}	
 					
 					totalTime = System.nanoTime() - startTime;
-					totalParseTime += myBigStruct.getParseTime();
-					totalWordCount = totalWordCount + myBigStruct.getWordCount();
-					totalUrlCount = totalUrlCount + myBigStruct.getUrlCount();
+					totalParseTime += data.getParseTime();
+					totalWordCount = totalWordCount + data.getWordCount();
+					totalUrlCount = totalUrlCount + data.getUrlCount();
 					/*Parsed: www.tacoma.washington.edu/calendar/
 						Pages Retrieved: 12
 						Average words per page: 321
@@ -121,10 +124,10 @@ public static void main(String[] args) throws IOException {
 					System.out.println("Average URL's per page: " + (totalUrlCount / retrieveCount));
 					System.out.printf("Keyword \tAvg. hits per page \tTotal hits\n");
 					
-					for (Map.Entry<String, Integer> word : myMap.entrySet()) {
+					for (Map.Entry<String, Integer> word : mainmap.entrySet()) {
 						System.out.printf("  %-20s %-20d %-20d\n", word.getKey(), word.getValue() / retrieveCount, word.getValue());
 					}
-					System.out.println("Page limit: " + count);
+					System.out.println("Page limit: " + depth);
 					System.out.printf("Average parse time per page: %.4f seconds\n", (totalParseTime / retrieveCount) * (Math.pow(10, -9)));
 					System.out.printf("Total running time: %.4f seconds\n", (totalTime * (Math.pow(10, -9))));
 					stringscan.close();
