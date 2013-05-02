@@ -8,6 +8,8 @@ import java.util.TreeMap;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 
 
 public class Main {
@@ -45,10 +47,29 @@ public static void main(String[] args) throws IOException {
 	    	BigStruct data = new BigStruct(null, "");
 	    	
 	    	try {
+	    		// Page retriever section
 				Document doc = Jsoup.connect(url.toExternalForm()).get();
 				
 				data.setDoc(doc);
 				data.setURL(url.toString());
+				
+				//Page parser section
+				data.setParseTime(System.nanoTime());
+				Elements links = doc.select("a[href]");
+				
+				for (Element link : links) {	
+					try {
+						String http = link.attr("abs:href");		
+						if (!http.equals("http://questioneverything.typepad.com/")) {
+							url_queue.addLast(new URL(http));
+							data.incrementUrlCount();		
+						}		
+					} catch (IOException e) {
+						// Throw away links that don't work
+					}
+				
+				// Data Gatherer section
+				depth--;
 												
 			} catch (IOException e) {
 				// Throw away links that don't work
