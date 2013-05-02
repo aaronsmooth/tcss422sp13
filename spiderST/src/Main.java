@@ -26,8 +26,9 @@ public static void main(String[] args) throws IOException {
 		ArrayDeque<BigStruct> gatherqueue = new ArrayDeque<>();
 		ArrayList<String> wordlist = new ArrayList<String>();
 		Map<String, Integer> mainmap = new TreeMap<String, Integer>();
-		final Scanner input = new Scanner(System.in);	
 		
+		final Scanner input = new Scanner(System.in);	
+		String texts;
 		final String main_url;
 	    int amount = gettingInput("How many words do you want to check? ");
 		getInput(input, wordlist, amount);
@@ -70,21 +71,24 @@ public static void main(String[] args) throws IOException {
 				}
 				
 				// Data Gatherer section
-				
+				for (String str : wordlist) {
+					mainmap.put(str, 0);
+				}
 				long totalTime = System.nanoTime() - startTime;
 				totalParseTime += data.getParseTime();
 				long totalWordCount = totalWordCount + data.getWordCount();
 				int totalUrlCount = totalUrlCount + data.getUrlCount();
+				String str;
 				
 				try {
-					texts = myDoc.body().text();
+					texts = doc.body().text();
 					Scanner stringscan = new Scanner(texts);
 		        
 					while (stringscan.hasNext()) {
 						str = stringscan.next().toLowerCase().replaceAll("\\W", "");
 						myBigStruct.incrementWordCount();
-						if (myMap.containsKey(str)) {
-							myMap.put(str, myMap.get(str)+ 1);
+						if (mainmap.containsKey(str)) {
+							mainmap.put(str, mainmap.get(str)+ 1);
 						}
 					}	
 					
