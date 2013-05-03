@@ -49,7 +49,7 @@ public class Main {
 		final String main_url;
 		int retrievethreads = gettingInput("Number of Page Retriever Threads? ");
 		int parsethreads = gettingInput("Number of Page Parser Threads? ");
-	    int amount = gettingInput("How many words do you want to check? ");
+	    int amount = gettingInput("How many words do you want to check? (MAXIMUM of 10) ");
 		getInput(input, wordlist, amount);
 		System.out.print("Enter the URL: ");
 		main_url = input.next();
@@ -102,10 +102,12 @@ public class Main {
 	    	System.out.print(thetxt);
 	    	if (console.hasNextInt()) {
 	    		result = console.nextInt();
-	    		if (result >= 1) {
+	    		if (result >= 1 && !thetxt.equals("How many words do you want to check? (MAXIMUM of 10) ")) {
+	    			validinput = true;
+	    		} else if (result >= 1 && result <= 10) {
 	    			validinput = true;
 	    		} else {
-	    			System.out.println("That is not a valid size! Must be a value greater than 0! ");
+	    			System.out.println("That is not a valid size! ");
 	    		}
 	    	} else {
 	    		System.out.println("Invalid entry! Must be an integer value! ");

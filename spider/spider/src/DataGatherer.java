@@ -145,7 +145,7 @@ public class DataGatherer extends Thread {
 		
 		try  
 		{
-			File file = new File("spiderMT.txt");
+			File file = new File("collected_data.txt");
 		    FileWriter fstream = new FileWriter(file, true); //true tells to append data.
 		    ps = new PrintWriter(fstream);
 		}
