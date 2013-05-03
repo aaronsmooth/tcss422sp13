@@ -55,7 +55,7 @@ public class Main {
 		int totalUrlCount = 0;
 		final String main_url;
 		int pagelimit;
-		int amount = gettingInput("How many words do you want to check? ");
+		int amount = gettingInput("How many words do you want to check? (MAXIMUM of 10) ");
 		getInput(input, wordlist, amount);
 		System.out.print("Enter the URL: ");
 		main_url = input.next();
@@ -75,7 +75,7 @@ public class Main {
 		PrintWriter ps = null;
 		try  
 		{
-			File file = new File("spiderST.txt");
+			File file = new File("collected_data.txt");
 		    FileWriter fstream = new FileWriter(file, true); //true tells to append data.
 		    ps = new PrintWriter(fstream);
 		}
@@ -213,10 +213,12 @@ public class Main {
 			System.out.print(thetxt);
 			if (console.hasNextInt()) {
 				result = console.nextInt();
-				if (result >= 1) {
-					validinput = true;
-				} else {
-					System.out.println("That is not a valid size! Must be a value greater than 0! ");
+				if (result >= 1 && !thetxt.equals("How many words do you want to check? (MAXIMUM of 10) ")) {
+	    			validinput = true;
+	    		} else if (result >= 1 && result <= 10) {
+	    			validinput = true;
+	    		} else {
+					System.out.println("That is not a valid size! ");
 				}
 			} else {
 				System.out.println("Invalid entry! Must be an integer value! ");
