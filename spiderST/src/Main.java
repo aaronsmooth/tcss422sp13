@@ -75,7 +75,7 @@ public class Main {
 		PrintWriter ps = null;
 		try  
 		{
-			File file = new File("spiderRunSingleThread.txt");
+			File file = new File("spiderST.txt");
 		    FileWriter fstream = new FileWriter(file, true); //true tells to append data.
 		    ps = new PrintWriter(fstream);
 		}
@@ -153,7 +153,10 @@ public class Main {
 					// Throw away docs with empty bodies
 				}
 				
-				ps.printf("\n\n\n");
+				ps.println();
+				ps.println();
+				ps.println("------------------------------------------------------------------------");
+				ps.println();
 				ps.println("Parsed: " + data.getUrlName());
 				ps.println("Pages Retrieved: " + retrieveCount);
 				ps.println("Average Words Per Page: " + (totalWordCount / retrieveCount));
