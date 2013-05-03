@@ -145,7 +145,7 @@ public class DataGatherer extends Thread {
 		
 		try  
 		{
-			File file = new File("spiderRunST.txt");
+			File file = new File("spiderMT.txt");
 		    FileWriter fstream = new FileWriter(file, true); //true tells to append data.
 		    ps = new PrintWriter(fstream);
 		}
@@ -213,7 +213,7 @@ public class DataGatherer extends Thread {
 				
 				
 				// Printing the data to a file
-				/*
+				
 				ps.printf("\n\n\n");
 				ps.println("Parsed: " + myBigStruct.getUrlName());
 				ps.println("Pages Retrieved: " + retrieveCount);
@@ -227,7 +227,7 @@ public class DataGatherer extends Thread {
 				ps.println("Page limit: " + count);
 				ps.printf("Average parse time per page: %.4f seconds\n", (totalParseTime / retrieveCount) * (Math.pow(10, -9)));
 				ps.printf("Total running time: %.4f seconds\n", (totalTime * (Math.pow(10, -9))));
-				*/			
+						
 				
 				
 			} catch (NullPointerException e) {
